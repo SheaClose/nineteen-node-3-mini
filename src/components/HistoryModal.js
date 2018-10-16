@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import './HistoryModal.css';
+import React, { Component } from "react";
+import axios from "axios";
+import "./HistoryModal.css";
 
 export default class HistoryModal extends Component {
   constructor(props) {
@@ -7,6 +8,12 @@ export default class HistoryModal extends Component {
     this.state = {
       historyMessages: []
     };
+  }
+  componentDidMount() {
+    axios.get("/api/history").then(response => {
+      console.log("response: ", response);
+      this.setState({ historyMessages: response.data });
+    });
   }
 
   render() {
